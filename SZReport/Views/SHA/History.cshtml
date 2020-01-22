@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = null;
+}
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            <select class="form-control" id="startMonth" onchange="LoadHistory()">
+                <option value="-1" selected>近1月</option>
+                <option value="-3">近3月</option>
+                <option value="-6">近6月</option>
+                <option value="-12">近1年</option>
+                <option value="-36">近3年</option>
+                <option value="-60">近5年</option>
+                <option value="-1000">全部</option>
+            </select>
+        </div>
+        <div class="col-md-12" id="History">
+
+        </div>
+    </div>
+<script>
+    LoadHistory();
+    function LoadHistory() {
+        $("#History").empty();
+        $("#History").load("/SHA/History_Data?startMonth=" + $("#startMonth").val()+"&Code=@ViewBag.Code").show();
+    }
+</script>

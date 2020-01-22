@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+    <div class="row">
+
+        <div class="col-md-1">
+            <label for="start">起始月</label>
+        </div>
+
+        <div class="col-md-4">
+            <input type="number" class="form-control" id="start" placeholder="" value="@DateTime.Now.Month">
+        </div>
+        <div class="col-md-1">
+            <label for="end">截至月</label>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control" id="end" placeholder="" value="@(DateTime.Now.Month+1)">
+        </div>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-1">
+            <label for="startyear">起始年</label>
+        </div>
+
+        <div class="col-md-4">
+            <input type="number" class="form-control" id="startyear" placeholder="" value="@(DateTime.Now.Year-3)">
+        </div>
+        <div class="col-md-1">
+            <label for="endyear">截至年</label>
+        </div>
+        <div class="col-md-4">
+            <input type="number" class="form-control" id="endyear" placeholder="" value="@(DateTime.Now.Year)">
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary btn-block" type="submit" onclick="ShowChart()">查询</button>
+        </div>
+        <div class="col-md-12" id="monthchart">
+
+        </div>
+    </div>
+        <script>
+            ShowChart();
+            function ShowChart() {
+                $("#monthchart").load("/SHA/MonthData?start=" + $("#start").val() + "&end=" + $("#end").val()+ "&startyear=" + $("#startyear").val()+ "&endyear=" + $("#endyear").val()).show();
+            }
+        </script>

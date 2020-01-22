@@ -1,0 +1,13 @@
+﻿
+@{
+    Layout = null;
+}
+
+    <div class="row">
+        @foreach (var a in ViewBag.Message)
+        {
+            <div class="col-md-4">@Html.Raw(a)</div>
+        }
+    </div>
+
+

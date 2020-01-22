@@ -1,0 +1,90 @@
+﻿@model ChartData
+
+@using Newtonsoft.Json
+
+@{ 
+    Layout = null;
+}
+
+    <div id="chart" style="width:1500px;height:600px">
+
+    </div>
+
+
+<script>
+    InitChart();
+
+    function InitChart() {
+    var dom = document.getElementById("chart");
+    
+    var myChart = echarts.init(dom);
+var app = {};
+option = null;
+option = {
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:@Html.Raw(Json.Serialize(Model.legend)),
+        selected: {
+            "赶紧跑路": false,
+            "为国护盘": false,
+            "最高": false,
+            "最低": false,
+            "MA5": false,
+            "MA10": false,
+            "MA20": false,
+            "MA30": false,
+            "MA60": false,
+            "MA90": false,
+            "MA120": false,
+            "MA200": false,
+            "MA250": false
+        }
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    dataZoom: [
+            {
+                show: true,
+                start: 0,
+                end: 100
+            },
+        {
+                start:@ViewBag.yStart,
+                show: true,
+                yAxisIndex: 0,
+                filterMode: 'empty',
+                width: 30,
+                height: '80%',
+                showDataShadow: false,
+                left: '97%'
+            }
+        ],
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: @Html.Raw(Json.Serialize(Model.xAxis))
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: @Html.Raw(Json.Serialize(Model.series))
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+    }
+    }
+
+</script>
+
